@@ -1,58 +1,54 @@
-# solana-example
+# stoick
 
-This project shows how one can index Orca Exchange USDC-SOL swaps using Subsquid SDK.
+[Squid](https://docs.subsquid.io) based data used to index, process, and query on top of Solana for [KodaDot](https://kodadot.xyz) NFT Marketplace.
 
-## About SDK
+## Hosted Squids
 
-Subsquid SDK is a TypeScript ETL toolkit for blockchain data, that currently supports
+* Solana Mainet: 🚧 Coming soon 🚧
 
-* Ethereum and everything Ethereum-like
-* [Substrate](https://substrate.io)-based chains
-* Solana.
+## Project structure
 
-Subsquid SDK stands apart from the competition by
+* `src/generated` - model/server definitions created by `codegen`. Do not alter the contents of this directory manually.
+* `src/server-extension` - module with custom `type-graphql` based resolvers.
+* `src/types` - data type definitions for chain events and extrinsics created by `typegen`.
+* `src/mappings` - mapping module.
+* `lib` - compiled js files. The structure of this directory must reflect `src`.
+* `.env` - environment variables defined here or supplied by a shell.
 
-* Being a toolkit (rather than an indexing app like TheGraph or Ponder)
-* Fast binary data codecs and type-safe access to decoded data  
-* Native support for sourcing the data from Subsquid Network.
+## Prerequisites
 
-The latter is a key point, as Subsquid Network is a decentralized data lake and query engine, 
-that allows to granularly select and stream subset of block data to lightweight clients 
-while providing game changing performance over traditional RPC API.
-
-## Getting started
-
-### Prerequisites
-
-* Node.js (version 20.x and above)
+* Node 20.x
 * Docker
+* npm
+* [just](https://github.com/casey/just)
 
-### Run indexer
+## Quickly running the sample
 
 ```bash
-# Install dependencies
-npm ci
+# 1. Install dependencies
+npm install
 
-# Compile the project
-npx tsc
+# 2. Build project
+just build
 
-# Launch Postgres database to store the data
-docker compose up -d
+# 3. Start target Postgres database container
+just upd
 
-# Apply database migrations to create the target schema
-npx squid-typeorm-migration apply
+# 4. Update database with data objects
+just migrate
 
-# Run indexer
-node -r dotenv/config lib/main.js
+# 5. Start the processor
+just process
 
-# Checkout indexed swaps
-docker exec "$(basename "$(pwd)")-db-1" psql -U postgres \
-  -c "SELECT slot, from_token, to_token, from_amount, to_amount FROM exchange ORDER BY id LIMIT 10"
+# 6. Open a separate terminal and launch the graphql server to query the processed data
+just serve
+
+# 7. Visit localhost:4350/graphql to see the result
 ```
 
-For further details please consult heavily commented [main.ts](./src/main.ts). 
+## Misc
 
-## Decoding binary data
+### Decoding binary data
 
 `@subsquid/borsh` package allows to easily define fast and type-safe codec for any Solana data structure.
 
