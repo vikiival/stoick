@@ -197,28 +197,34 @@ run(dataSource, database, async (ctx) => {
       if (ins.programId === PROGRAM_ID) {
         console.log(ins.d1)
 
-        const discriminator = Number(ins.d1)
+        const discriminator = ins.d1 // Number(ins.d1)
         // debug('instruction' as any, ins, true)
         // debug('ins.inner' as any, ins.inner, true)
         // debug('getTX' as any, ins.getTransaction(), true)
 
         switch (discriminator) {
           // case instructions.createCollectionV1.d8:
-          case 0:
+          case instructions.createV1.d1:
             const mint = instructions.createV1.decode({
               accounts: ins.accounts,
               data: ins.data,
             })
             debug('createV1' as any, mint, true)
             break
-          case 1:
+          case instructions.createCollectionV1.d1:
             const collection = instructions.createCollectionV1.decode({
               accounts: ins.accounts,
               data: ins.data,
             })
             debug('createCollectionV1' as any, collection, true)
             break
-
+          case instructions.transferV1.d1:
+            const transfer = instructions.createCollectionV1.decode({
+              accounts: ins.accounts,
+              data: ins.data,
+            })
+            debug('transferV1' as any, transfer, true)
+            break
           default:
             debug('unknown instruction' as any, {
               d1: ins.d1,
@@ -235,6 +241,5 @@ run(dataSource, database, async (ctx) => {
   // await ctx.store.insert(collections)
 })
 
-// export type Fields = EvmBatchProcessorFields<typeof processor>
 // export type Block = BlockHeader<Fields>
 // export type Process = DataHandlerContext<Block, Store>
