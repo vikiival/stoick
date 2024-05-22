@@ -1,5 +1,5 @@
 import { struct, unit } from '@subsquid/borsh'
-import { instruction } from '../idl.support'
+import { instruction } from '../abi.support'
 import {
   AddCollectionPluginV1Args,
   AddPluginV1Args,
@@ -106,7 +106,7 @@ export interface AddPluginV1 {
 
 export const addPluginV1 = instruction(
   {
-    d8: '0x60155ee2c2357803',
+    d1: '0x02',
   },
   {
     /**
@@ -145,7 +145,7 @@ export interface AddCollectionPluginV1 {
 
 export const addCollectionPluginV1 = instruction(
   {
-    d8: '0x178eaad55ddab302',
+    d1: '0x03',
   },
   {
     /**
@@ -180,7 +180,7 @@ export interface RemovePluginV1 {
 
 export const removePluginV1 = instruction(
   {
-    d8: '0xaa4fca7b5165a858',
+    d1: '0x04',
   },
   {
     /**
@@ -219,7 +219,7 @@ export interface RemoveCollectionPluginV1 {
 
 export const removeCollectionPluginV1 = instruction(
   {
-    d8: '0x6fc1c8bc9f7ef234',
+    d1: '0x05',
   },
   {
     /**
@@ -254,7 +254,7 @@ export interface UpdatePluginV1 {
 
 export const updatePluginV1 = instruction(
   {
-    d8: '0xad44300dff007620',
+    d1: '0x06',
   },
   {
     /**
@@ -293,7 +293,7 @@ export interface UpdateCollectionPluginV1 {
 
 export const updateCollectionPluginV1 = instruction(
   {
-    d8: '0xc81039978c92bf17',
+    d1: '0x07',
   },
   {
     /**
@@ -328,7 +328,7 @@ export interface ApprovePluginAuthorityV1 {
 
 export const approvePluginAuthorityV1 = instruction(
   {
-    d8: '0x374224f0fa496724',
+    d1: '0x08',
   },
   {
     /**
@@ -367,7 +367,7 @@ export interface ApproveCollectionPluginAuthorityV1 {
 
 export const approveCollectionPluginAuthorityV1 = instruction(
   {
-    d8: '0xba633dbd6f18380a',
+    d1: '0x09',
   },
   {
     /**
@@ -403,7 +403,7 @@ export interface RevokePluginAuthorityV1 {
 
 export const revokePluginAuthorityV1 = instruction(
   {
-    d8: '0xfba92ac368e9c44a',
+    d1: '0x0a',
   },
   {
     /**
@@ -442,7 +442,7 @@ export interface RevokeCollectionPluginAuthorityV1 {
 
 export const revokeCollectionPluginAuthorityV1 = instruction(
   {
-    d8: '0x788729dc5e06c286',
+    d1: '0x0b',
   },
   {
     /**
@@ -478,7 +478,7 @@ export interface BurnV1 {
 
 export const burnV1 = instruction(
   {
-    d8: '0xf163c24c067e319a',
+    d1: '0x0c',
   },
   {
     /**
@@ -517,7 +517,7 @@ export interface BurnCollectionV1 {
 
 export const burnCollectionV1 = instruction(
   {
-    d8: '0x759ea6bce665868e',
+    d1: '0x0d',
   },
   {
     /**
@@ -548,7 +548,7 @@ export interface TransferV1 {
 
 export const transferV1 = instruction(
   {
-    d8: '0xdb5f400a3789856d',
+    d1: '0x0e',
   },
   {
     /**
@@ -591,7 +591,7 @@ export interface UpdateV1 {
 
 export const updateV1 = instruction(
   {
-    d8: '0xcf9dbb3fcd951fa5',
+    d1: '0x0f',
   },
   {
     /**
@@ -630,7 +630,7 @@ export interface UpdateCollectionV1 {
 
 export const updateCollectionV1 = instruction(
   {
-    d8: '0xaa50f8b0aa8e1195',
+    d1: '0x10',
   },
   {
     /**
@@ -669,7 +669,7 @@ export interface CompressV1 {
 
 export const compressV1 = instruction(
   {
-    d8: '0xe97f67bd47f17fb2',
+    d1: '0x11',
   },
   {
     /**
@@ -708,7 +708,7 @@ export interface DecompressV1 {
 
 export const decompressV1 = instruction(
   {
-    d8: '0x36554c46e4faa451',
+    d1: '0x12',
   },
   {
     /**
@@ -745,7 +745,7 @@ export type Collect = undefined
 
 export const collect = instruction(
   {
-    d8: '0xd02fc29b116252ec',
+    d1: '0x13',
   },
   {
     /**
