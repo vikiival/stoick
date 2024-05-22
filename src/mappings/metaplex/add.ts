@@ -11,10 +11,14 @@
 // import { Instruction } from '@subsquid/solana-objects'
 // import { createCollectionV1 } from '../../abi/program/instructions'
 
+import { Instruction } from "@subsquid/solana-objects"
 
 // const OPERATION = Action.CREATE
 
-// export async function handleCollectionAdd(context: Instruction<typeof createCollectionV1>, process: Context): Promise<void> {
+export async function handleCollectionAdd(context: Instruction<any>, process: any): Promise<void> {
+}
+
+// export async function handleCollectionAdd(context: Instruction<any>, process: Context): Promise<void> {
 //   pending(OPERATION, `[COLECTTION++]: ${context.block.height}`)
 //   const event = unwrap(context, getCreateCollectionEvent)
 //   const final = await getOrCreate(process.store, CE, event.collection, {})
@@ -53,16 +57,4 @@
 
 //   await process.store.save(final)
 //   success(OPERATION, `[COLLECTION] ${final.id}`)
-// }
-
-
-// export function forceCollectionCreate(collection: string): CE | undefined {
-//   const cache =  ContractsMap[collection as Contracts];
-//   const baseUri = BASE_URI_MAP[collection as Contracts]
-
-//   if (cache) {
-//     return create(CE, collection, {...cache, hash: md5(collection), baseUri })
-//   }
-
-//   return undefined
 // }
