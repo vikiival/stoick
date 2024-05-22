@@ -1,0 +1,162 @@
+type CollectionEntity @entity {
+  blockNumber: BigInt
+  createdAt: DateTime!
+  currentOwner: String!
+  distribution: Int! # dummy
+  events: [CollectionEvent!] @derivedFrom(field: "collection")
+  floor: BigInt! # dummy
+  hash: String! @unique
+  highestSale: BigInt! # dummy
+  id: ID!
+  image: String
+  issuer: String!
+  max: Int
+  media: String
+  meta: MetadataEntity
+  metadata: String
+  name: String @index
+  nftCount: Int! # dummy
+  nfts: [NFTEntity!] @derivedFrom(field: "collection")
+  ownerCount: Int! # dummy
+  supply: Int! # dummy
+  baseUri: String
+  symbol: String # dummy
+  type: CollectionType!
+  updatedAt: DateTime!
+  version: Int! # dummy
+  volume: BigInt! # dummy
+}
+
+type NFTEntity @entity {
+  blockNumber: BigInt
+  burned: Boolean!
+  collection: CollectionEntity!
+  createdAt: DateTime!
+  currentOwner: String! @index
+  events: [Event!] @derivedFrom(field: "nft")
+  hash: String! @index
+  id: ID!
+  image: String
+  issuer: String!
+  lewd: Boolean!
+  media: String
+  meta: MetadataEntity
+  metadata: String
+  name: String @index
+  price: BigInt
+  recipient: String
+  royalty: Float
+  sn: String!
+  updatedAt: DateTime!
+  version: Int!
+  token: TokenEntity!
+}
+
+type TokenEntity @entity {
+  id: ID!
+  blockNumber: BigInt
+  collection: CollectionEntity
+  nfts: [NFTEntity!] @derivedFrom(field: "token")
+  hash: String! @index
+  image: String
+  media: String
+  name: String @index
+  updatedAt: DateTime!
+  createdAt: DateTime!
+  count: Int!
+}
+
+type MetadataEntity @entity {
+  id: ID!
+  name: String
+  description: String
+  image: String
+  attributes: [Attribute!]
+  animationUrl: String
+  type: String
+}
+
+type Attribute @jsonField {
+  display: String
+  trait: String
+  value: String!
+}
+
+interface EventType {
+  id: ID!
+  blockNumber: BigInt
+  timestamp: DateTime!
+  caller: String!
+  currentOwner: String
+  interaction: Interaction!
+  # version: Int!
+  meta: String!
+}
+
+type Event implements EventType @entity {
+  id: ID!
+  blockNumber: BigInt
+  timestamp: DateTime!
+  caller: String!
+  currentOwner: String! # currentOwner
+  interaction: Interaction!
+  meta: String!
+  nft: NFTEntity!
+  # version: Int!
+}
+
+type CollectionEvent implements EventType @entity {
+  id: ID!
+  blockNumber: BigInt
+  timestamp: DateTime!
+  caller: String!
+  currentOwner: String # currentOwner
+  interaction: Interaction!
+  meta: String!
+  collection: CollectionEntity!
+  # version: Int!
+}
+
+enum CollectionType {
+  ERC721
+  ERC1155
+}
+
+enum Interaction {
+  BURN
+  BUY
+  CREATE
+  LIST
+  MINT
+  SEND
+  UNLIST
+}
+# type Owner @entity {
+#     id: ID! # owner address
+#     ownedTokens: [Token!]! @derivedFrom(field: "owner")
+# }
+
+# type Token @entity {
+#     id: ID! # string form of tokenId
+#     tokenId: BigInt!
+#     owner: Owner!
+#     uri: String!
+#     image: String
+#     attributes: [Attribute!]
+#     transfers: [Transfer!]! @derivedFrom(field: "token")
+# }
+
+# type Attribute {
+#     traitType: String!
+#     value: String!
+# }
+
+# type Transfer @entity {
+#     id: ID!
+#     token: Token!
+#     from: Owner!
+#     to: Owner!
+#     timestamp: DateTime!
+#     blockNumber: Int!
+#     txHash: String! @index
+# }
